@@ -16,6 +16,7 @@
 		0B6FFE3B28048802000EE3C2 /* UpcomingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6FFE3A28048802000EE3C2 /* UpcomingViewController.swift */; };
 		0B6FFE3D28048838000EE3C2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6FFE3C28048838000EE3C2 /* SearchViewController.swift */; };
 		0B6FFE3F28048873000EE3C2 /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6FFE3E28048873000EE3C2 /* DownloadsViewController.swift */; };
+		0B6FFE462804CF2C000EE3C2 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6FFE452804CF2C000EE3C2 /* CollectionTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		0B6FFE3A28048802000EE3C2 /* UpcomingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingViewController.swift; sourceTree = "<group>"; };
 		0B6FFE3C28048838000EE3C2 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		0B6FFE3E28048873000EE3C2 /* DownloadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
+		0B6FFE452804CF2C000EE3C2 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,11 @@
 		0B6FFE22280484AF000EE3C2 /* Cinematrix */ = {
 			isa = PBXGroup;
 			children = (
+				0B6FFE442804CDE8000EE3C2 /* Managers */,
+				0B6FFE432804CDDC000EE3C2 /* Resources */,
+				0B6FFE422804CDB4000EE3C2 /* Models */,
+				0B6FFE412804CDAA000EE3C2 /* Views */,
+				0B6FFE402804CD9B000EE3C2 /* ViewModel */,
 				0B6FFE37280487A2000EE3C2 /* Controllers */,
 				0B6FFE23280484AF000EE3C2 /* AppDelegate.swift */,
 				0B6FFE25280484AF000EE3C2 /* SceneDelegate.swift */,
@@ -82,6 +89,42 @@
 				0B6FFE3E28048873000EE3C2 /* DownloadsViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		0B6FFE402804CD9B000EE3C2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0B6FFE412804CDAA000EE3C2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0B6FFE452804CF2C000EE3C2 /* CollectionTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0B6FFE422804CDB4000EE3C2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0B6FFE432804CDDC000EE3C2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0B6FFE442804CDE8000EE3C2 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +204,7 @@
 				0B6FFE26280484AF000EE3C2 /* SceneDelegate.swift in Sources */,
 				0B6FFE3B28048802000EE3C2 /* UpcomingViewController.swift in Sources */,
 				0B6FFE39280487CD000EE3C2 /* HomeViewController.swift in Sources */,
+				0B6FFE462804CF2C000EE3C2 /* CollectionTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

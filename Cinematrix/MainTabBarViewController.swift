@@ -17,8 +17,7 @@ class MainTabBarViewController: UITabBarController {
         let vc2 = UINavigationController(rootViewController: UpcomingViewController())
         let vc3 = UINavigationController(rootViewController: SearchViewController())
         let vc4 = UINavigationController(rootViewController: DownloadsViewController())
-        
-        
+                
         vc1.tabBarItem.image = UIImage(systemName: "house.circle")
         vc2.tabBarItem.image = UIImage(systemName: "play.circle")
         vc3.tabBarItem.image = UIImage(systemName: "magnifyingglass.circle")
@@ -28,7 +27,6 @@ class MainTabBarViewController: UITabBarController {
         vc2.title = "New"
         vc3.title = "Search"
         vc4.title = "Downloads"
-        
         
         tabBar.tintColor = .label
         
