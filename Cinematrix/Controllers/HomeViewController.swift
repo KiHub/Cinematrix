@@ -9,7 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    let sectionTitles: [String] = ["Trendy movies", "Popular", "Trendy TV", "Upcoming movies", "Top rated"]
+    let sectionTitles: [String] = ["Trendy movies", "Trendy TV", "Popular", "Upcoming movies", "Top rated"]
     
     private let homeTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -97,6 +97,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let header = view as? UITableViewHeaderFooterView else {return}
         header.textLabel?.font = .systemFont(ofSize: 20, weight: .semibold)
         header.textLabel?.frame = CGRect(x: header.bounds.origin.x, y: header.bounds.origin.y, width: 100, height: header.bounds.height)
+        header.textLabel?.text = header.textLabel?.text?.capitlizeFirstLetter()
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
