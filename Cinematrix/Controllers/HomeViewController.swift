@@ -30,11 +30,24 @@ class HomeViewController: UIViewController {
         let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         homeTable.tableHeaderView = headerView
         
+        getTrendyMovies()
+        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         homeTable.frame = view.bounds
+    }
+    
+    private func getTrendyMovies() {
+        APICaller.shared.getTrendyMovies { results in
+            switch results {
+            case .success(let movies):
+                print(movies)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     private func configureNavBar() {
