@@ -124,6 +124,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             APICaller.shared.getUpcomingMovies { result in
                 switch result {
                 case .success(let movies):
+                    print(movies[0].poster_path)
                     cell.configure(with: movies)
                 case .failure(let error):
                     print(error.localizedDescription)

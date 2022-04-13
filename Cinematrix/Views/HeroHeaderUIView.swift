@@ -8,7 +8,9 @@
 import UIKit
 import SDWebImage
 
+
 class HeroHeaderUIView: UIView {
+    
     
     private let playButton: UIButton = {
         let button = UIButton()
@@ -30,18 +32,30 @@ class HeroHeaderUIView: UIView {
         return button
     }()
     
-//    private let setHero: UIImage {
-//        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(model)") else { return }
-//        posterImageView.sd_setImage(with: url, completed: nil)
-//    }()
+
     
     private let heroImageView: UIImageView = {
+        let randomNumber = Int.random(in: 0..<11)
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "hero")
-        return imageView
         
+        
+        APICaller.shared.getTopratedMovies { result in
+                     switch result {
+                     case .success(let movies):
+                         var poster = movies[randomNumber].poster_path
+                         guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(poster ?? "/abPQVYyNfVuGoFUfGVhlNecu0QG.jpg")") else { return }
+                         imageView.sd_setImage(with: url, completed: nil)
+                         DispatchQueue.main.async {
+                             imageView.sd_setImage(with: url, completed: nil)
+                         }
+                     case .failure(let error):
+                         print(error.localizedDescription)
+                    
+                     }
+                 }
+        return imageView
     }()
     
     private func addGradient() {
