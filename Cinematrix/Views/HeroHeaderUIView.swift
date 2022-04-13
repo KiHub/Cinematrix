@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class HeroHeaderUIView: UIView {
     
@@ -28,6 +29,11 @@ class HeroHeaderUIView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+//    private let setHero: UIImage {
+//        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(model)") else { return }
+//        posterImageView.sd_setImage(with: url, completed: nil)
+//    }()
     
     private let heroImageView: UIImageView = {
         let imageView = UIImageView()

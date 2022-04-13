@@ -27,23 +27,21 @@ class APICaller {
                 completion(.success(results.results))
             //    print(results.results[1].title)
             } catch {
-                completion(.failure(error))
+                completion(.failure(APIError.failedGetData))
             }
         }
         task.resume()
     }
     
-    func getTrendyTv(completion: @escaping (Result<[Tv], Error>) -> Void ) {
+    func getTrendyTv(completion: @escaping (Result<[Movie], Error>) -> Void ) {
         guard let url = URL(string: "\(Constants.baseUrl)/3/trending/tv/day?api_key=\(Constants.key)") else { return }
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else { return}
             do {
-                let results = try JSONDecoder().decode(TrendyTvResponse.self, from: data)
-                print(results)
-           //     completion(.success(results.results))
+                let results = try JSONDecoder().decode(TrendyMoviesResponse.self, from: data)
+                completion(.success(results.results))
             } catch {
-                print(error.localizedDescription)
-            //    completion(.failure(error))
+                completion(.failure(APIError.failedGetData))
             }
         }
         task.resume()
@@ -55,9 +53,9 @@ class APICaller {
             guard let data = data, error == nil else { return }
             do {
                 let results = try JSONDecoder().decode(TrendyMoviesResponse.self, from: data)
-                print(results)
+                completion(.success(results.results))
             } catch {
-                print(error.localizedDescription)
+                completion(.failure(APIError.failedGetData))
             }
         }
         task.resume()
@@ -69,9 +67,9 @@ class APICaller {
             guard let data = data, error == nil else { return }
             do {
                 let results = try JSONDecoder().decode(TrendyMoviesResponse.self, from: data)
-                print(results)
+                completion(.success(results.results))
             } catch {
-                print(error.localizedDescription)
+                completion(.failure(APIError.failedGetData))
             }
         }
         task.resume()
@@ -83,9 +81,9 @@ class APICaller {
             guard let data = data, error == nil else { return }
             do {
                 let results = try JSONDecoder().decode(TrendyMoviesResponse.self, from: data)
-                print(results)
+                completion(.success(results.results))
             } catch {
-                print(error.localizedDescription)
+                completion(.failure(APIError.failedGetData))
             }
         }
         task.resume()
