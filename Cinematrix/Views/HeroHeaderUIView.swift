@@ -11,6 +11,7 @@ import SDWebImage
 
 class HeroHeaderUIView: UIView {
     
+    var basicColor = UIColor.systemBackground
     
     private let playButton: UIButton = {
         let button = UIButton()
@@ -58,11 +59,13 @@ class HeroHeaderUIView: UIView {
         return imageView
     }()
     
-    private func addGradient() {
+     func addGradient() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [
+            basicColor.cgColor,
             UIColor.clear.cgColor,
-            UIColor.systemBackground.cgColor
+            basicColor.cgColor
+           // UIColor.systemBackground.cgColor
         ]
         gradientLayer.frame = bounds
         layer.addSublayer(gradientLayer)

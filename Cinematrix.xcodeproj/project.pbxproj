@@ -27,6 +27,7 @@
 		0B6FFE5A2806C573000EE3C2 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0B6FFE592806C573000EE3C2 /* SDWebImageMapKit */; };
 		0B6FFE5C280710E1000EE3C2 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6FFE5B280710E1000EE3C2 /* MovieTableViewCell.swift */; };
 		0B6FFE5E2807190B000EE3C2 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6FFE5D2807190B000EE3C2 /* MovieViewModel.swift */; };
+		0B6FFE6028072D47000EE3C2 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6FFE5F28072D47000EE3C2 /* SearchResultsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		0B6FFE542806C37D000EE3C2 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		0B6FFE5B280710E1000EE3C2 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		0B6FFE5D2807190B000EE3C2 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
+		0B6FFE5F28072D47000EE3C2 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				0B6FFE3A28048802000EE3C2 /* UpcomingViewController.swift */,
 				0B6FFE3C28048838000EE3C2 /* SearchViewController.swift */,
 				0B6FFE3E28048873000EE3C2 /* DownloadsViewController.swift */,
+				0B6FFE5F28072D47000EE3C2 /* SearchResultsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B6FFE3D28048838000EE3C2 /* SearchViewController.swift in Sources */,
+				0B6FFE6028072D47000EE3C2 /* SearchResultsViewController.swift in Sources */,
 				0B6FFE4D2805F3A1000EE3C2 /* Constants.swift in Sources */,
 				0B6FFE4F2805FC01000EE3C2 /* Movie.swift in Sources */,
 				0B6FFE28280484AF000EE3C2 /* MainTabBarViewController.swift in Sources */,

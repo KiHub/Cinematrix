@@ -17,6 +17,7 @@ enum Sections: Int {
 
 class HomeViewController: UIViewController {
     
+    var heroHeader = HeroHeaderUIView()
     let sectionTitles: [String] = ["Trendy movies", "Trendy series", "Popular", "Upcoming movies", "Top rated"]
     
     private let homeTable: UITableView = {
@@ -24,6 +25,22 @@ class HomeViewController: UIViewController {
         table.register(CollectionTableViewCell.self, forCellReuseIdentifier: CollectionTableViewCell.identifier)
         return table
     }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if UITraitCollection.current.userInterfaceStyle == .dark {
+                print("Dark mode")
+            heroHeader.basicColor = UIColor.black
+            heroHeader.addGradient()
+            }
+            else {
+                print("Light mode")
+                heroHeader.basicColor = UIColor.white
+                heroHeader.addGradient()
+            }
+        
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +86,7 @@ class HomeViewController: UIViewController {
         UIBarButtonItem(image: UIImage(systemName: "envelope"), style: .done, target: self, action: nil)
         ]
         navigationController?.navigationBar.tintColor = .systemGray
+       
     }
     
 }
@@ -124,7 +142,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             APICaller.shared.getUpcomingMovies { result in
                 switch result {
                 case .success(let movies):
-                    print(movies[0].poster_path)
+                 //   print(movies[0].poster_path)
                     cell.configure(with: movies)
                 case .failure(let error):
                     print(error.localizedDescription)

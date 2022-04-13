@@ -16,6 +16,15 @@ class SearchViewController: UIViewController {
         table.register(MovieTableViewCell.self, forCellReuseIdentifier: MovieTableViewCell.identifier)
         return table
     }()
+    
+    //MARK: - Create and set search bar
+    private let searchController: UISearchController = {
+        let controller = UISearchController(searchResultsController: SearchResultsViewController())
+        controller.searchBar.placeholder = "Best movie search"
+        controller.searchBar.searchBarStyle = .minimal
+        return controller
+        
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +37,10 @@ class SearchViewController: UIViewController {
         searchTable.delegate = self
         searchTable.dataSource = self
         
+        navigationItem.searchController = searchController
+        navigationController?.navigationBar.tintColor = .gray
         fetchTopSearchedMovies()
+        searchController.searchResultsUpdater = self
         
     }
     
@@ -70,5 +82,32 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 180
     }
+    
+}
+
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        guard let query = searchBar.text,
+              !query.trimmingCharacters(in: .whitespaces).isEmpty,
+              query.trimmingCharacters(in: .whitespaces).count >= 3,
+              let resultsController = searchController.searchResultsController as? SearchResultsViewController
+        else {return}
+        
+        APICaller.shared.search(with: query) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let movies):
+                    resultsController.movies = movies
+                    resultsController.searchResultsCollectionView.reloadData()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        
+    }
+    
+   
     
 }
