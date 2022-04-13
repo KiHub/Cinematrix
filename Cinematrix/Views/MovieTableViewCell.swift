@@ -13,7 +13,7 @@ class MovieTableViewCell: UITableViewCell {
     
     private let playButton: UIButton = {
         let button = UIButton()
-        let image = UIImage(systemName: "play", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30))
+        let image = UIImage(systemName: "play", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25))
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .systemGray
@@ -24,7 +24,7 @@ class MovieTableViewCell: UITableViewCell {
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-      //  label.numberOfLines = 2
+        label.numberOfLines = 0
         
         return label
     }()
@@ -33,7 +33,9 @@ class MovieTableViewCell: UITableViewCell {
         
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 15
         return imageView
         
     }()
@@ -58,13 +60,14 @@ class MovieTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate(titlePosterImageViewConstraints)
         
         let titleLabelConstraints = [
-            titleLabel.leadingAnchor.constraint(equalTo: titlePosterImageView.trailingAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: titlePosterImageView.trailingAnchor, constant: 15),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -35),
             titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ]
         NSLayoutConstraint.activate(titleLabelConstraints)
         
         let playButtonConstraints = [
-            playButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            playButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
             playButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ]
         NSLayoutConstraint.activate(playButtonConstraints)
