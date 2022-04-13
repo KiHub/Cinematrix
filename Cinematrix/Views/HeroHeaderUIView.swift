@@ -32,7 +32,7 @@ class HeroHeaderUIView: UIView {
         return button
     }()
     
-
+    
     
     private let heroImageView: UIImageView = {
         let randomNumber = Int.random(in: 0..<11)
@@ -42,19 +42,19 @@ class HeroHeaderUIView: UIView {
         
         
         APICaller.shared.getTopratedMovies { result in
-                     switch result {
-                     case .success(let movies):
-                         var poster = movies[randomNumber].poster_path
-                         guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(poster ?? "/abPQVYyNfVuGoFUfGVhlNecu0QG.jpg")") else { return }
-                         imageView.sd_setImage(with: url, completed: nil)
-                         DispatchQueue.main.async {
-                             imageView.sd_setImage(with: url, completed: nil)
-                         }
-                     case .failure(let error):
-                         print(error.localizedDescription)
-                    
-                     }
-                 }
+            switch result {
+            case .success(let movies):
+                var poster = movies[randomNumber].poster_path
+                guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(poster ?? "/abPQVYyNfVuGoFUfGVhlNecu0QG.jpg")") else { return }
+                imageView.sd_setImage(with: url, completed: nil)
+                DispatchQueue.main.async {
+                    imageView.sd_setImage(with: url, completed: nil)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                
+            }
+        }
         return imageView
     }()
     
@@ -67,7 +67,7 @@ class HeroHeaderUIView: UIView {
         gradientLayer.frame = bounds
         layer.addSublayer(gradientLayer)
     }
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(heroImageView)

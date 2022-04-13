@@ -25,6 +25,8 @@
 		0B6FFE552806C37D000EE3C2 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6FFE542806C37D000EE3C2 /* MovieCollectionViewCell.swift */; };
 		0B6FFE582806C573000EE3C2 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 0B6FFE572806C573000EE3C2 /* SDWebImage */; };
 		0B6FFE5A2806C573000EE3C2 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0B6FFE592806C573000EE3C2 /* SDWebImageMapKit */; };
+		0B6FFE5C280710E1000EE3C2 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6FFE5B280710E1000EE3C2 /* MovieTableViewCell.swift */; };
+		0B6FFE5E2807190B000EE3C2 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6FFE5D2807190B000EE3C2 /* MovieViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		0B6FFE4E2805FC01000EE3C2 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		0B6FFE5028061787000EE3C2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0B6FFE542806C37D000EE3C2 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
+		0B6FFE5B280710E1000EE3C2 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
+		0B6FFE5D2807190B000EE3C2 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +115,7 @@
 		0B6FFE402804CD9B000EE3C2 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				0B6FFE5D2807190B000EE3C2 /* MovieViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -121,6 +126,7 @@
 				0B6FFE452804CF2C000EE3C2 /* CollectionTableViewCell.swift */,
 				0B6FFE4728057E24000EE3C2 /* HeroHeaderUIView.swift */,
 				0B6FFE542806C37D000EE3C2 /* MovieCollectionViewCell.swift */,
+				0B6FFE5B280710E1000EE3C2 /* MovieTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -239,11 +245,13 @@
 				0B6FFE4F2805FC01000EE3C2 /* Movie.swift in Sources */,
 				0B6FFE28280484AF000EE3C2 /* MainTabBarViewController.swift in Sources */,
 				0B6FFE3F28048873000EE3C2 /* DownloadsViewController.swift in Sources */,
+				0B6FFE5C280710E1000EE3C2 /* MovieTableViewCell.swift in Sources */,
 				0B6FFE4A2805F307000EE3C2 /* APICaller.swift in Sources */,
 				0B6FFE4828057E24000EE3C2 /* HeroHeaderUIView.swift in Sources */,
 				0B6FFE24280484AF000EE3C2 /* AppDelegate.swift in Sources */,
 				0B6FFE5128061787000EE3C2 /* Extensions.swift in Sources */,
 				0B6FFE26280484AF000EE3C2 /* SceneDelegate.swift in Sources */,
+				0B6FFE5E2807190B000EE3C2 /* MovieViewModel.swift in Sources */,
 				0B6FFE3B28048802000EE3C2 /* UpcomingViewController.swift in Sources */,
 				0B6FFE552806C37D000EE3C2 /* MovieCollectionViewCell.swift in Sources */,
 				0B6FFE39280487CD000EE3C2 /* HomeViewController.swift in Sources */,
