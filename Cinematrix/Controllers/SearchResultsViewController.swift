@@ -12,7 +12,7 @@ class SearchResultsViewController: UIViewController {
     public var movies: [Movie] = [Movie]()
     
     public let searchResultsCollectionView: UICollectionView = {
-        
+       
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: UIScreen.main.bounds.width / 3 - 15, height: 200)
         layout.minimumInteritemSpacing = 0

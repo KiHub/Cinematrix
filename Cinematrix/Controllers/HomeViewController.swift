@@ -55,8 +55,6 @@ class HomeViewController: UIViewController {
         let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         homeTable.tableHeaderView = headerView
         
-      
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -106,6 +104,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionTableViewCell.identifier, for: indexPath) as? CollectionTableViewCell else { return UITableViewCell() }
+        
+        cell.delegate = self
         
         switch indexPath.section {
         case Sections.TrendyMovies.rawValue:
@@ -192,6 +192,19 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let ofset = scrollView.contentOffset.y + defaultOffset
         
         navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -ofset))
+    }
+    
+    
+}
+
+extension HomeViewController: CollectionTableViewCellDelegate {
+    func collectionTableViewCellDidTapCell(_ cell: CollectionTableViewCell, viewModel: MoviePreviewViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            let vc = MoviePreviewViewController()
+            vc.configure(with: viewModel)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+       
     }
     
     
