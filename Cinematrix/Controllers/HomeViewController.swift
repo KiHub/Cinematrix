@@ -234,6 +234,8 @@ extension HomeViewController: CollectionTableViewCellDelegate {
         DispatchQueue.main.async { [weak self] in
             let vc = MoviePreviewViewController()
             vc.configure(with: viewModel)
+//            vc.configure(with: MoviePreviewViewModel(title: title ?? "No data", youtubeView: viewModel.youtubeView, titleOverview: viewModel.titleOverview ))
+    //        vc.configure(with: MoviePreviewViewModel(title: titleName, youtubeView: video, titleOverview: title.overview ?? "No data"))
             self?.navigationController?.pushViewController(vc, animated: true)
         }
        

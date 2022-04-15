@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol SearchResultsViewControllerDelegate: AnyObject {
+    func searchResultsViewControllerDidTapItem(_ viewModel: MoviePreviewViewModel)
+}
+
 class SearchResultsViewController: UIViewController {
     
     public var movies: [Movie] = [Movie]()
+    public weak var delegate: SearchResultsViewControllerDelegate?
     
     public let searchResultsCollectionView: UICollectionView = {
        
@@ -53,7 +58,20 @@ extension SearchResultsViewController: UICollectionViewDelegate, UICollectionVie
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let title = movies[indexPath.row ]
+        let titleName = title.title ?? ""
+        APICaller.shared.getMovie(with: titleName) { [weak self] result in
+            switch result {
+            case .success(let video):
+                self?.delegate?.searchResultsViewControllerDidTapItem(MoviePreviewViewModel(title: title.title ?? "", youtubeView: video , titleOverview: title.overview ?? ""))
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
+      
+    }
     
     
 }
