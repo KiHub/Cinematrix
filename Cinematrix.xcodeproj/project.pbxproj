@@ -31,6 +31,8 @@
 		0B6FFE6228087F28000EE3C2 /* YoutubeSearchResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6FFE6128087F28000EE3C2 /* YoutubeSearchResponce.swift */; };
 		0B6FFE64280883E0000EE3C2 /* MoviePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6FFE63280883E0000EE3C2 /* MoviePreviewViewController.swift */; };
 		0B6FFE6628088E36000EE3C2 /* MoviePreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6FFE6528088E36000EE3C2 /* MoviePreviewViewModel.swift */; };
+		0B6FFE692809D645000EE3C2 /* CinematrixModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0B6FFE672809D645000EE3C2 /* CinematrixModel.xcdatamodeld */; };
+		0B6FFE6B2809DD16000EE3C2 /* DataPersistentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6FFE6A2809DD16000EE3C2 /* DataPersistentManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		0B6FFE6128087F28000EE3C2 /* YoutubeSearchResponce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeSearchResponce.swift; sourceTree = "<group>"; };
 		0B6FFE63280883E0000EE3C2 /* MoviePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePreviewViewController.swift; sourceTree = "<group>"; };
 		0B6FFE6528088E36000EE3C2 /* MoviePreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePreviewViewModel.swift; sourceTree = "<group>"; };
+		0B6FFE682809D645000EE3C2 /* CinematrixModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CinematrixModel.xcdatamodel; sourceTree = "<group>"; };
+		0B6FFE6A2809DD16000EE3C2 /* DataPersistentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistentManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,7 @@
 				0B6FFE2C280484B1000EE3C2 /* Assets.xcassets */,
 				0B6FFE2E280484B1000EE3C2 /* LaunchScreen.storyboard */,
 				0B6FFE31280484B1000EE3C2 /* Info.plist */,
+				0B6FFE672809D645000EE3C2 /* CinematrixModel.xcdatamodeld */,
 			);
 			path = Cinematrix;
 			sourceTree = "<group>";
@@ -163,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				0B6FFE492805F307000EE3C2 /* APICaller.swift */,
+				0B6FFE6A2809DD16000EE3C2 /* DataPersistentManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -258,7 +264,9 @@
 				0B6FFE4D2805F3A1000EE3C2 /* Constants.swift in Sources */,
 				0B6FFE4F2805FC01000EE3C2 /* Movie.swift in Sources */,
 				0B6FFE28280484AF000EE3C2 /* MainTabBarViewController.swift in Sources */,
+				0B6FFE6B2809DD16000EE3C2 /* DataPersistentManager.swift in Sources */,
 				0B6FFE3F28048873000EE3C2 /* DownloadsViewController.swift in Sources */,
+				0B6FFE692809D645000EE3C2 /* CinematrixModel.xcdatamodeld in Sources */,
 				0B6FFE5C280710E1000EE3C2 /* MovieTableViewCell.swift in Sources */,
 				0B6FFE6628088E36000EE3C2 /* MoviePreviewViewModel.swift in Sources */,
 				0B6FFE4A2805F307000EE3C2 /* APICaller.swift in Sources */,
@@ -507,6 +515,19 @@
 			productName = SDWebImageMapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		0B6FFE672809D645000EE3C2 /* CinematrixModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0B6FFE682809D645000EE3C2 /* CinematrixModel.xcdatamodel */,
+			);
+			currentVersion = 0B6FFE682809D645000EE3C2 /* CinematrixModel.xcdatamodel */;
+			path = CinematrixModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0B6FFE18280484AF000EE3C2 /* Project object */;
 }

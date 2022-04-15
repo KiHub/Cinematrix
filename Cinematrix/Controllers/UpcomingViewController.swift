@@ -71,6 +71,7 @@ extension UpcomingViewController: UITableViewDelegate, UITableViewDataSource {
         return 180
     }
     
+    //MARK: - Push on row perform and run preview page
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let title = movies[indexPath.row]

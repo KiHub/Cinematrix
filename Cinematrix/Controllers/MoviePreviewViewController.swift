@@ -10,6 +10,8 @@ import WebKit
 
 class MoviePreviewViewController: UIViewController {
     
+   
+    
     private let titleLabel: UILabel = {
         
         let label = UILabel()
@@ -31,14 +33,44 @@ class MoviePreviewViewController: UIViewController {
     
     private let downloadButton: UIButton = {
         
-        let button = UIButton()
+        let button = UIButton(type: .system)
+        button.backgroundColor = .clear
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.gray.cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .red
         button.setTitle("Download", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.gray, for: .normal)
         button.clipsToBounds = true
-        button.layer.cornerRadius = 15
+        button.layer.cornerRadius = 14
+     
         return button
+    }()
+    
+    private let backButton: UIButton = {
+        
+        let button = UIButton(type: .system)
+        button.backgroundColor = .clear
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.gray.cgColor
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Back", for: .normal)
+        button.setTitleColor(.gray, for: .normal)
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 14
+        button.addTarget(self, action: #selector(backAction), for: .touchUpInside)
+        return button
+    }()
+    
+    private let horizontalStackView: UIStackView = {
+        let horizontalStackView = UIStackView()
+        horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
+        horizontalStackView.axis = .horizontal
+        horizontalStackView.distribution = .fillEqually
+        horizontalStackView.alignment = .center
+        horizontalStackView.spacing = 40
+        
+        return horizontalStackView
+        
     }()
     
     private let webWiew: WKWebView = {
@@ -58,7 +90,10 @@ class MoviePreviewViewController: UIViewController {
         view.addSubview(webWiew)
         view.addSubview(titleLabel)
         view.addSubview(overViewLabel)
-        view.addSubview(downloadButton)
+      //  view.addSubview(downloadButton)
+        horizontalStackView.addArrangedSubview(backButton)
+        horizontalStackView.addArrangedSubview(downloadButton)
+        view.addSubview(horizontalStackView)
     }
     func setupConstraints() {
         let webViewConstraints = [
@@ -82,12 +117,22 @@ class MoviePreviewViewController: UIViewController {
         ]
         NSLayoutConstraint.activate(overViewLabelConstraints)
         
-        let downloadButtonConstraints = [
-            downloadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            downloadButton.topAnchor.constraint(equalTo: overViewLabel.bottomAnchor, constant: 20),
-            downloadButton.widthAnchor.constraint(equalToConstant: 150)
+//        let downloadButtonConstraints = [
+//            downloadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            downloadButton.topAnchor.constraint(equalTo: overViewLabel.bottomAnchor, constant: 20),
+//            downloadButton.widthAnchor.constraint(equalToConstant: 150)
+//        ]
+//        NSLayoutConstraint.activate(downloadButtonConstraints)
+        let stackViewConstraints = [
+          //  downloadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            backButton.widthAnchor.constraint(equalToConstant: 140),
+            downloadButton.widthAnchor.constraint(equalToConstant: 140),
+            horizontalStackView.topAnchor.constraint(equalTo: overViewLabel.bottomAnchor, constant: 20),
+            horizontalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            horizontalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ]
-        NSLayoutConstraint.activate(downloadButtonConstraints)
+        NSLayoutConstraint.activate(stackViewConstraints)
+        
     }
     
     func configure(with model: MoviePreviewViewModel) {
@@ -98,6 +143,11 @@ class MoviePreviewViewController: UIViewController {
         webWiew.load(URLRequest(url: url))
     }
     
+    @objc func backAction(sender: UIButton!) {
+      print("Button tapped")
+        navigationController?.popViewController(animated: true)
+       // dismiss(animated: true, completion: nil)
+    }
     
 
 }
