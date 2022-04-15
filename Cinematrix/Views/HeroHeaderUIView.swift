@@ -12,6 +12,7 @@ import SDWebImage
 class HeroHeaderUIView: UIView {
     
     var basicColor = UIColor.systemBackground
+
     
     private let playButton: UIButton = {
         let button = UIButton()
@@ -36,26 +37,11 @@ class HeroHeaderUIView: UIView {
     
     
     private let heroImageView: UIImageView = {
-        let randomNumber = Int.random(in: 0..<11)
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         
-        
-        APICaller.shared.getTopratedMovies { result in
-            switch result {
-            case .success(let movies):
-                var poster = movies[randomNumber].poster_path
-                guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(poster ?? "/abPQVYyNfVuGoFUfGVhlNecu0QG.jpg")") else { return }
-                imageView.sd_setImage(with: url, completed: nil)
-                DispatchQueue.main.async {
-                    imageView.sd_setImage(with: url, completed: nil)
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-                
-            }
-        }
+
         return imageView
     }()
     
@@ -95,6 +81,12 @@ class HeroHeaderUIView: UIView {
         ]
         NSLayoutConstraint.activate(downloadButtonConstraints)
         
+    }
+    
+    public func configureHeaderImage(with model: MovieViewModel) {
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(model.posterUrl)") else { return }
+
+        heroImageView.sd_setImage(with: url, completed: nil)
     }
     
     override func layoutSubviews() {

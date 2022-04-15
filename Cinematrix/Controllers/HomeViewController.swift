@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 enum Sections: Int {
     case TrendyMovies = 0
     case TrendyTv = 1
@@ -17,7 +18,11 @@ enum Sections: Int {
 
 class HomeViewController: UIViewController {
     
-    var heroHeader = HeroHeaderUIView()
+    private var randomTrendyMovie: Movie?
+    private var headerView: HeroHeaderUIView?
+    
+  //  var heroHeader = HeroHeaderUIView()
+    let refreshControl = UIRefreshControl()
     let sectionTitles: [String] = ["Trendy movies", "Trendy series", "Popular", "Upcoming movies", "Top rated"]
     
     private let homeTable: UITableView = {
@@ -28,16 +33,16 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if UITraitCollection.current.userInterfaceStyle == .dark {
-                print("Dark mode")
-            heroHeader.basicColor = UIColor.black
-            heroHeader.addGradient()
-            }
-            else {
-                print("Light mode")
-                heroHeader.basicColor = UIColor.white
-                heroHeader.addGradient()
-            }
+//        if UITraitCollection.current.userInterfaceStyle == .dark {
+//                print("Dark mode")
+//            heroHeader.basicColor = UIColor.black
+//            heroHeader.addGradient()
+//            }
+//            else {
+//                print("Light mode")
+//                heroHeader.basicColor = UIColor.white
+//                heroHeader.addGradient()
+//            }
         
         
     }
@@ -52,9 +57,10 @@ class HomeViewController: UIViewController {
         
         configureNavBar()
         
-        let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
+        headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         homeTable.tableHeaderView = headerView
-        
+        configureHeaderView()
+        setupRefreshControl()
     }
     
     override func viewDidLayoutSubviews() {
@@ -73,6 +79,31 @@ class HomeViewController: UIViewController {
 //        }
 //    }
     
+    private func configureHeaderView() {
+
+        APICaller.shared.getTrendyMovies { [weak self] result in
+            switch result {
+            case .success(let movies):
+                let selectedTitle = movies.randomElement()
+
+                self?.randomTrendyMovie = selectedTitle
+                DispatchQueue.main.async {
+                    self?.headerView?.configureHeaderImage(with: MovieViewModel(titleName: selectedTitle?.title ?? "", posterUrl: selectedTitle?.poster_path ?? ""))
+                    self?.homeTable.refreshControl?.endRefreshing()
+                }
+          
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func setupRefreshControl() {
+
+          refreshControl.addTarget(self, action: #selector(refreshContent), for: .valueChanged)
+          homeTable.refreshControl = refreshControl
+    }
+    
     private func configureNavBar() {
         var image = UIImage(named: "miniLogo")
         image = image?.withRenderingMode(.alwaysOriginal)
@@ -84,6 +115,7 @@ class HomeViewController: UIViewController {
         UIBarButtonItem(image: UIImage(systemName: "envelope"), style: .done, target: self, action: nil)
         ]
         navigationController?.navigationBar.tintColor = .systemGray
+       
        
     }
     
@@ -208,4 +240,11 @@ extension HomeViewController: CollectionTableViewCellDelegate {
     }
     
     
+}
+
+extension HomeViewController {
+    @objc func refreshContent() {
+        configureHeaderView()
+        print("refresh")
+        }
 }
