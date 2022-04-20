@@ -104,6 +104,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension SearchViewController: UISearchResultsUpdating, SearchResultsViewControllerDelegate {
+    
+    
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         guard let query = searchBar.text,
@@ -135,6 +137,12 @@ extension SearchViewController: UISearchResultsUpdating, SearchResultsViewContro
             self?.navigationController?.pushViewController(vc, animated: true)
         }
 
+    }
+    func searchResultsViewControllerDidTapItemForSave(_ movie: Movie) {
+        DispatchQueue.main.async { [weak self] in
+        let vc = MoviePreviewViewController()
+        vc.titleForPreview = movie
+        }
     }
     
 }

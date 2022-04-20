@@ -87,6 +87,20 @@ class MoviePreviewViewController: UIViewController {
         setupConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupAddButton()
+    }
+    
+    func setupAddButton() {
+        
+        if titleForPreview?.title == nil {
+            downloadButton.isHidden = true
+        } else {
+            downloadButton.isHidden = false
+        }
+    }
+    
     func setup() {
         view.backgroundColor = .systemBackground
         view.addSubview(webWiew)
