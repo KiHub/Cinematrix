@@ -8,22 +8,24 @@
 import UIKit
 
 
+
 enum Sections: Int {
     case TrendyMovies = 0
-    case TrendyTv = 1
-    case Popular = 2
-    case Upcoming = 3
-    case TopRated = 4
+   // case TrendyTv = 1
+    case Popular = 1
+    case Upcoming = 2
+    case TopRated = 3
 }
 
 class HomeViewController: UIViewController {
     
     private var randomTrendyMovie: Movie?
     private var headerView: HeroHeaderUIView?
-    
+
+   
   //  var heroHeader = HeroHeaderUIView()
     let refreshControl = UIRefreshControl()
-    let sectionTitles: [String] = ["Trendy movies", "Trendy series", "Popular", "Upcoming movies", "Top rated"]
+    let sectionTitles: [String] = ["Trendy", "Popular", "Upcoming", "Top rated"]
     
     private let homeTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -44,7 +46,7 @@ class HomeViewController: UIViewController {
 //                heroHeader.addGradient()
 //            }
         
-        
+
     }
 
     override func viewDidLoad() {
@@ -54,7 +56,8 @@ class HomeViewController: UIViewController {
         
         homeTable.delegate = self
         homeTable.dataSource = self
-        
+        homeTable.separatorStyle = .none
+        homeTable.backgroundColor = .systemBackground
         configureNavBar()
         
         headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
@@ -90,8 +93,8 @@ class HomeViewController: UIViewController {
                 DispatchQueue.main.async {
                     self?.headerView?.configureHeaderImage(with: MovieViewModel(titleName: selectedTitle?.title ?? "", posterUrl: selectedTitle?.poster_path ?? ""))
                     self?.homeTable.refreshControl?.endRefreshing()
+                   
                 }
-          
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -111,8 +114,8 @@ class HomeViewController: UIViewController {
         
         navigationItem.leftBarButtonItems =
         [
-        UIBarButtonItem(image: UIImage(systemName: "person"), style: .done, target: self, action: nil),
-        UIBarButtonItem(image: UIImage(systemName: "envelope"), style: .done, target: self, action: nil)
+        UIBarButtonItem(image: UIImage(systemName: "info"), style: .done, target: self, action:  #selector(aboutAction)),
+        UIBarButtonItem(image: UIImage(systemName: "star"), style: .done, target: self, action:  #selector(personAction))
         ]
         navigationController?.navigationBar.tintColor = .systemGray
        
@@ -121,9 +124,6 @@ class HomeViewController: UIViewController {
     
 }
 
-
-
-
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -131,14 +131,14 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionTableViewCell.identifier, for: indexPath) as? CollectionTableViewCell else { return UITableViewCell() }
         
         cell.delegate = self
-        
+        cell.backgroundColor = .systemBackground
         switch indexPath.section {
         case Sections.TrendyMovies.rawValue:
             APICaller.shared.getTrendyMovies { result in
@@ -150,15 +150,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             
-        case Sections.TrendyTv.rawValue:
-            APICaller.shared.getTrendyTv { result in
-                switch result {
-                case .success(let movies):
-                    cell.configure(with: movies)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
+//        case Sections.TrendyTv.rawValue:
+//            APICaller.shared.getTrendyTv { result in
+//                switch result {
+//                case .success(let movies):
+//                    cell.configure(with: movies)
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//                }
+//            }
             
         case Sections.Popular.rawValue:
             APICaller.shared.getPopular { result in
@@ -209,6 +209,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else {return}
+        let background = UIView(frame: view.bounds)
+        background.backgroundColor = .systemBackground
+        header.backgroundView = background
         header.textLabel?.font = .systemFont(ofSize: 20, weight: .semibold)
         header.textLabel?.frame = CGRect(x: header.bounds.origin.x, y: header.bounds.origin.y, width: 100, height: header.bounds.height)
         header.textLabel?.text = header.textLabel?.text?.capitlizeFirstLetter()
@@ -234,14 +237,17 @@ extension HomeViewController: CollectionTableViewCellDelegate {
         DispatchQueue.main.async { [weak self] in
             let vc = MoviePreviewViewController()
             vc.configure(with: viewModel)
+//                        guard let title = self?.titleForPreviewHome else {return}
+//                        vc.titleForPreview = title
+            self?.navigationController?.pushViewController(vc, animated: true)
+          //  vc.
 //            vc.configure(with: MoviePreviewViewModel(title: title ?? "No data", youtubeView: viewModel.youtubeView, titleOverview: viewModel.titleOverview ))
     //        vc.configure(with: MoviePreviewViewModel(title: titleName, youtubeView: video, titleOverview: title.overview ?? "No data"))
-            self?.navigationController?.pushViewController(vc, animated: true)
+           
+//            guard let title = self?.titleForPreviewHome else {return}
+//            vc.titleForPreview = title
         }
-       
     }
-    
-    
 }
 
 extension HomeViewController {
@@ -249,4 +255,28 @@ extension HomeViewController {
         configureHeaderView()
         print("refresh")
         }
+    @objc func personAction() {
+        let vc = DownloadsViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+        print("person")
+        }
+    @objc func mailAction() {
+        print("mail")
+        }
+    @objc func aboutAction() {
+        showAlert()
+        print("about")
+        }
+}
+
+extension HomeViewController {
+    func showAlert() {
+       let alert = UIAlertController(title: "About cinematrix",
+                                     message: "Hey, this is fresh and easy to use app for all cine lovers",
+                                     preferredStyle: .actionSheet)
+       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true) {
+            alert.view.tintColor = .gray
+        }
+   }
 }

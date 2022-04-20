@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class UpcomingViewController: UIViewController {
     
@@ -23,7 +24,8 @@ class UpcomingViewController: UIViewController {
         title = "New"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .always
-       
+        upcomingTable.separatorStyle = .none
+        navigationController?.navigationBar.tintColor = .gray
         view.addSubview(upcomingTable)
         upcomingTable.delegate = self
         upcomingTable.dataSource = self
@@ -83,6 +85,7 @@ extension UpcomingViewController: UITableViewDelegate, UITableViewDataSource {
                 DispatchQueue.main.async {
                 let vc = MoviePreviewViewController()
                 vc.configure(with: MoviePreviewViewModel(title: titleName, youtubeView: video, titleOverview: title.overview ?? "No data"))
+                    vc.titleForPreview = title
                 self?.navigationController?.pushViewController(vc, animated: true)
             }
             case .failure(let error):

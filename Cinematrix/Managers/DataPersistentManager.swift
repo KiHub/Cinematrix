@@ -39,6 +39,7 @@ class DataPersistentManager {
         do {
             try context.save()
             completion(.success(()))
+            print("Saved")
         } catch {
                 completion(.failure(CoreDataErrors.failedToSave))
             print(error.localizedDescription)

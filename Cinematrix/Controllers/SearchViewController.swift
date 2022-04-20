@@ -29,10 +29,10 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        title = "Popular"
+        title = "Search"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .always
-        
+        searchTable.separatorStyle = .none
         view.addSubview(searchTable)
         searchTable.delegate = self
         searchTable.dataSource = self
@@ -93,6 +93,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
                 DispatchQueue.main.async {
                 let vc = MoviePreviewViewController()
                 vc.configure(with: MoviePreviewViewModel(title: titleName, youtubeView: video, titleOverview: title.overview ?? "No data"))
+                    vc.titleForPreview = title
                 self?.navigationController?.pushViewController(vc, animated: true)
             }
             case .failure(let error):
@@ -130,6 +131,7 @@ extension SearchViewController: UISearchResultsUpdating, SearchResultsViewContro
         DispatchQueue.main.async { [weak self] in 
             let vc = MoviePreviewViewController()
             vc.configure(with: viewModel)
+            
             self?.navigationController?.pushViewController(vc, animated: true)
         }
 

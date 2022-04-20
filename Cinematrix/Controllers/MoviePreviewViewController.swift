@@ -10,7 +10,9 @@ import WebKit
 
 class MoviePreviewViewController: UIViewController {
     
-   
+  //  var index: IndexPath?
+    var titleForPreview: Movie?
+    private var movies: [Movie] = [Movie]()
     
     private let titleLabel: UILabel = {
         
@@ -38,11 +40,11 @@ class MoviePreviewViewController: UIViewController {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.gray.cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Download", for: .normal)
+        button.setTitle("Add to list", for: .normal)
         button.setTitleColor(.gray, for: .normal)
         button.clipsToBounds = true
         button.layer.cornerRadius = 14
-     
+        button.addTarget(self, action: #selector(addAction), for: .touchUpInside)
         return button
     }()
     
@@ -143,11 +145,45 @@ class MoviePreviewViewController: UIViewController {
         webWiew.load(URLRequest(url: url))
     }
     
+//    @objc func backAction(sender: UIButton!) {
+//      print("Button tapped")
+//        navigationController?.popViewController(animated: true)
+//       // dismiss(animated: true, completion: nil)
+//    }
+    
+
+}
+
+extension MoviePreviewViewController {
     @objc func backAction(sender: UIButton!) {
-      print("Button tapped")
+      print("Back button tapped")
         navigationController?.popViewController(animated: true)
        // dismiss(animated: true, completion: nil)
     }
-    
+    @objc func addAction(sender: UIButton!) {
+      print("Add button tapped")
+      //  guard let indexPath = index else {return}
+        print(titleForPreview?.title)
+        guard let currentMovie = titleForPreview else {return}
+        print(currentMovie.title)
+        downloadTitleAt(currentMovie: currentMovie)
+    }
+}
 
+extension MoviePreviewViewController {
+    // save movie in core data
+    private func downloadTitleAt(currentMovie: Movie) {
+        
+        DataPersistentManager.shared.downloadMovieToDataBase(model: currentMovie) { result in
+            switch result {
+            case .success():
+                print("Downloaded to DB")
+                NotificationCenter.default.post(name: NSNotification.Name("loaded"), object: nil)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+     //   print("Downloading \(movies[indexPath.row].title)")
+    }
+    
 }

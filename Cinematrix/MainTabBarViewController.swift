@@ -18,15 +18,15 @@ class MainTabBarViewController: UITabBarController {
         let vc3 = UINavigationController(rootViewController: SearchViewController())
         let vc4 = UINavigationController(rootViewController: DownloadsViewController())
                 
-        vc1.tabBarItem.image = UIImage(systemName: "house.circle")
+        vc1.tabBarItem.image = UIImage(systemName: "circle.circle")
         vc2.tabBarItem.image = UIImage(systemName: "flag.circle")
-        vc3.tabBarItem.image = UIImage(systemName: "chart.line.uptrend.xyaxis.circle")
-        vc4.tabBarItem.image = UIImage(systemName: "arrow.down.circle")
+        vc3.tabBarItem.image = UIImage(systemName: "magnifyingglass.circle")
+        vc4.tabBarItem.image = UIImage(systemName: "star.circle")
         
-        vc1.title = "Home"
+        vc1.title = "Explore"
         vc2.title = "New"
-        vc3.title = "Popular"
-        vc4.title = "Downloads"
+        vc3.title = "Search"
+        vc4.title = "Watchlist"
         
         tabBar.tintColor = .label
         

@@ -20,12 +20,14 @@ class DownloadsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        title = "Downloads"
+        title = "Watchlist"
         view.addSubview(downloadTable)
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .always
         downloadTable.delegate = self
         downloadTable.dataSource = self
+        downloadTable.separatorStyle = .none
+        navigationController?.navigationBar.tintColor = .gray
         fetchLocalDataForDownload()
         NotificationCenter.default.addObserver(forName: NSNotification.Name("loaded"), object: nil, queue: nil) { _ in
             self.fetchLocalDataForDownload()
