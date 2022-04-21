@@ -33,6 +33,9 @@
 		0B6FFE6628088E36000EE3C2 /* MoviePreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6FFE6528088E36000EE3C2 /* MoviePreviewViewModel.swift */; };
 		0B6FFE692809D645000EE3C2 /* CinematrixModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0B6FFE672809D645000EE3C2 /* CinematrixModel.xcdatamodeld */; };
 		0B6FFE6B2809DD16000EE3C2 /* DataPersistentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6FFE6A2809DD16000EE3C2 /* DataPersistentManager.swift */; };
+		0BB388192811E38700DDF549 /* OnboardingContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB388182811E38700DDF549 /* OnboardingContainerViewController.swift */; };
+		0BB3881B2811E3D200DDF549 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB3881A2811E3D200DDF549 /* OnboardingViewController.swift */; };
+		0BB3881D2811F1DA00DDF549 /* LocalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB3881C2811F1DA00DDF549 /* LocalState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +65,9 @@
 		0B6FFE6528088E36000EE3C2 /* MoviePreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePreviewViewModel.swift; sourceTree = "<group>"; };
 		0B6FFE682809D645000EE3C2 /* CinematrixModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CinematrixModel.xcdatamodel; sourceTree = "<group>"; };
 		0B6FFE6A2809DD16000EE3C2 /* DataPersistentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistentManager.swift; sourceTree = "<group>"; };
+		0BB388182811E38700DDF549 /* OnboardingContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerViewController.swift; sourceTree = "<group>"; };
+		0BB3881A2811E3D200DDF549 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		0BB3881C2811F1DA00DDF549 /* LocalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +102,7 @@
 		0B6FFE22280484AF000EE3C2 /* Cinematrix */ = {
 			isa = PBXGroup;
 			children = (
+				0BB388172811E35B00DDF549 /* Onboarding */,
 				0B6FFE4B2805F37C000EE3C2 /* Utils */,
 				0B6FFE442804CDE8000EE3C2 /* Managers */,
 				0B6FFE432804CDDC000EE3C2 /* Resources */,
@@ -177,8 +184,18 @@
 			isa = PBXGroup;
 			children = (
 				0B6FFE4C2805F3A1000EE3C2 /* Constants.swift */,
+				0BB3881C2811F1DA00DDF549 /* LocalState.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		0BB388172811E35B00DDF549 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				0BB388182811E38700DDF549 /* OnboardingContainerViewController.swift */,
+				0BB3881A2811E3D200DDF549 /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,10 +289,13 @@
 				0B6FFE4A2805F307000EE3C2 /* APICaller.swift in Sources */,
 				0B6FFE4828057E24000EE3C2 /* HeroHeaderUIView.swift in Sources */,
 				0B6FFE24280484AF000EE3C2 /* AppDelegate.swift in Sources */,
+				0BB388192811E38700DDF549 /* OnboardingContainerViewController.swift in Sources */,
 				0B6FFE5128061787000EE3C2 /* Extensions.swift in Sources */,
+				0BB3881D2811F1DA00DDF549 /* LocalState.swift in Sources */,
 				0B6FFE26280484AF000EE3C2 /* SceneDelegate.swift in Sources */,
 				0B6FFE5E2807190B000EE3C2 /* MovieViewModel.swift in Sources */,
 				0B6FFE64280883E0000EE3C2 /* MoviePreviewViewController.swift in Sources */,
+				0BB3881B2811E3D200DDF549 /* OnboardingViewController.swift in Sources */,
 				0B6FFE3B28048802000EE3C2 /* UpcomingViewController.swift in Sources */,
 				0B6FFE552806C37D000EE3C2 /* MovieCollectionViewCell.swift in Sources */,
 				0B6FFE39280487CD000EE3C2 /* HomeViewController.swift in Sources */,
