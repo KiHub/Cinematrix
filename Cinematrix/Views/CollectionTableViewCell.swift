@@ -35,6 +35,7 @@ class CollectionTableViewCell: UITableViewCell {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+   
     }
     
     required init?(coder: NSCoder) {

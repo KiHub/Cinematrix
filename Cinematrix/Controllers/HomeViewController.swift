@@ -92,6 +92,8 @@ class HomeViewController: UIViewController {
                 self?.randomTrendyMovie = selectedTitle
                 DispatchQueue.main.async {
                     self?.headerView?.configureHeaderImage(with: MovieViewModel(titleName: selectedTitle?.title ?? "", posterUrl: selectedTitle?.poster_path ?? ""))
+                    
+                    
                     self?.homeTable.refreshControl?.endRefreshing()
                    
                 }
@@ -227,6 +229,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let defaultOffset = view.safeAreaInsets.top
         let ofset = scrollView.contentOffset.y + defaultOffset
         
+        
         navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -ofset))
     }
     
@@ -252,9 +255,24 @@ extension HomeViewController: CollectionTableViewCellDelegate {
 }
 
 extension HomeViewController {
+    private func shakeLabel() {
+        let animation = CAKeyframeAnimation()
+        animation.keyPath = "position.x"
+ 
+        animation.values = [0, 15, -10, 15, 0]
+        animation.keyTimes = [0, 0.16, 0.5, 0.83, 1]
+        animation.duration = 0.4
+        animation.isAdditive = true
+        headerView?.layer.add(animation, forKey: "shake")
+    }
+}
+
+extension HomeViewController {
     @objc func refreshContent() {
         configureHeaderView()
+        shakeLabel()
         print("refresh")
+        
         }
     @objc func selectedAction() {
         let vc = DownloadsViewController()
