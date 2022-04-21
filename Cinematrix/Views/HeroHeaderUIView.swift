@@ -12,6 +12,7 @@ import SDWebImage
 class HeroHeaderUIView: UIView {
     
     var basicColor = UIColor.systemBackground
+    
 
 //    
 //    private let playButton: UIButton = {

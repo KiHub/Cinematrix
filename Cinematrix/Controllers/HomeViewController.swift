@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
     private var headerView: HeroHeaderUIView?
 
    
-  //  var heroHeader = HeroHeaderUIView()
+    var heroHeader = HeroHeaderUIView()
     let refreshControl = UIRefreshControl()
     let sectionTitles: [String] = ["Trendy", "Popular", "Upcoming", "Top rated"]
     
@@ -33,8 +33,8 @@ class HomeViewController: UIViewController {
         return table
     }()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
 //        if UITraitCollection.current.userInterfaceStyle == .dark {
 //                print("Dark mode")
 //            heroHeader.basicColor = UIColor.black
@@ -45,9 +45,9 @@ class HomeViewController: UIViewController {
 //                heroHeader.basicColor = UIColor.white
 //                heroHeader.addGradient()
 //            }
-        
-
-    }
+//        
+//
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +59,7 @@ class HomeViewController: UIViewController {
         homeTable.separatorStyle = .none
         homeTable.backgroundColor = .systemBackground
         configureNavBar()
-        
+      
         headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         homeTable.tableHeaderView = headerView
         configureHeaderView()
@@ -111,11 +111,12 @@ class HomeViewController: UIViewController {
         var image = UIImage(named: "miniLogo")
         image = image?.withRenderingMode(.alwaysOriginal)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
-        
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
         navigationItem.leftBarButtonItems =
         [
-        UIBarButtonItem(image: UIImage(systemName: "info"), style: .done, target: self, action:  #selector(aboutAction)),
-        UIBarButtonItem(image: UIImage(systemName: "star"), style: .done, target: self, action:  #selector(personAction))
+       // UIBarButtonItem(image: UIImage(systemName: "info"), style: .done, target: self, action:  #selector(aboutAction)),
+        UIBarButtonItem(image: UIImage(systemName: "star"), style: .done, target: self, action:  #selector(selectedAction))
         ]
         navigationController?.navigationBar.tintColor = .systemGray
        
@@ -255,28 +256,28 @@ extension HomeViewController {
         configureHeaderView()
         print("refresh")
         }
-    @objc func personAction() {
+    @objc func selectedAction() {
         let vc = DownloadsViewController()
         self.navigationController?.pushViewController(vc, animated: true)
         print("person")
         }
-    @objc func mailAction() {
-        print("mail")
-        }
-    @objc func aboutAction() {
-        showAlert()
-        print("about")
-        }
+//    @objc func mailAction() {
+//        print("mail")
+//        }
+//    @objc func aboutAction() {
+//        showAlert()
+//        print("about")
+//        }
 }
 
-extension HomeViewController {
-    func showAlert() {
-       let alert = UIAlertController(title: "About cinematrix",
-                                     message: "Hey, this is fresh and easy to use app for all cine lovers",
-                                     preferredStyle: .actionSheet)
-       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true) {
-            alert.view.tintColor = .gray
-        }
-   }
-}
+//extension HomeViewController {
+//    func showAlert() {
+//       let alert = UIAlertController(title: "About cinematrix",
+//                                     message: "Hey, this is fresh and easy to use app for all cine lovers",
+//                                     preferredStyle: .actionSheet)
+//       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//        present(alert, animated: true) {
+//            alert.view.tintColor = .gray
+//        }
+//   }
+//}

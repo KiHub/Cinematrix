@@ -6,9 +6,10 @@
 //
 
 import Foundation
-
+import UIKit
 
 struct Constants {
+    let basicColor = UIColor.systemBackground
     static let key = "edaa24f1a24fce03a6308b9dc7fe0ff9"
     
     static let baseUrl = "https://api.themoviedb.org"

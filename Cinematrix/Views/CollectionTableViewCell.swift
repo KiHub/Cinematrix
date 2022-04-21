@@ -30,7 +30,7 @@ class CollectionTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .systemPink
+        contentView.backgroundColor = .systemBackground
         contentView.addSubview(collectionView)
         
         collectionView.delegate = self

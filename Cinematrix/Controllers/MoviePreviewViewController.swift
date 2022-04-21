@@ -13,6 +13,23 @@ class MoviePreviewViewController: UIViewController {
   //  var index: IndexPath?
     var titleForPreview: Movie?
     private var movies: [Movie] = [Movie]()
+
+    lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 250)
+    
+    lazy var scrollView: UIScrollView = {
+        let view = UIScrollView(frame: .zero)
+        view.backgroundColor = .systemBackground
+        view.frame = self.view.bounds
+        view.contentSize = contentViewSize
+        return view
+    }()
+    
+    lazy var containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        view.frame.size = contentViewSize
+        return view
+    }()
     
     private let titleLabel: UILabel = {
         
@@ -103,17 +120,28 @@ class MoviePreviewViewController: UIViewController {
     
     func setup() {
         view.backgroundColor = .systemBackground
-        view.addSubview(webWiew)
-        view.addSubview(titleLabel)
-        view.addSubview(overViewLabel)
+        
+        view.addSubview(scrollView)
+        scrollView.addSubview(containerView)
+        
+        containerView.addSubview(webWiew)
+        containerView.addSubview(titleLabel)
+        containerView.addSubview(overViewLabel)
       //  view.addSubview(downloadButton)
         horizontalStackView.addArrangedSubview(backButton)
         horizontalStackView.addArrangedSubview(downloadButton)
-        view.addSubview(horizontalStackView)
+        containerView.addSubview(horizontalStackView)
     }
     func setupConstraints() {
+        let containerViewConstrains = [
+            containerView.topAnchor.constraint(equalTo: view.topAnchor),
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ]
+        NSLayoutConstraint.activate(containerViewConstrains)
+        
         let webViewConstraints = [
-            webWiew.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            webWiew.topAnchor.constraint(equalTo: view.topAnchor),
             webWiew.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             webWiew.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             webWiew.heightAnchor.constraint(equalToConstant: 300)
