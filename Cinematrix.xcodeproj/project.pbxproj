@@ -36,6 +36,7 @@
 		0BB388192811E38700DDF549 /* OnboardingContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB388182811E38700DDF549 /* OnboardingContainerViewController.swift */; };
 		0BB3881B2811E3D200DDF549 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB3881A2811E3D200DDF549 /* OnboardingViewController.swift */; };
 		0BB3881D2811F1DA00DDF549 /* LocalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB3881C2811F1DA00DDF549 /* LocalState.swift */; };
+		0BB3881F2812CFED00DDF549 /* HomeViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB3881E2812CFED00DDF549 /* HomeViewControllerExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		0BB388182811E38700DDF549 /* OnboardingContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerViewController.swift; sourceTree = "<group>"; };
 		0BB3881A2811E3D200DDF549 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		0BB3881C2811F1DA00DDF549 /* LocalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalState.swift; sourceTree = "<group>"; };
+		0BB3881E2812CFED00DDF549 /* HomeViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				0B6FFE5028061787000EE3C2 /* Extensions.swift */,
+				0BB3881E2812CFED00DDF549 /* HomeViewControllerExtensions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				0BB3881B2811E3D200DDF549 /* OnboardingViewController.swift in Sources */,
 				0B6FFE3B28048802000EE3C2 /* UpcomingViewController.swift in Sources */,
 				0B6FFE552806C37D000EE3C2 /* MovieCollectionViewCell.swift in Sources */,
+				0BB3881F2812CFED00DDF549 /* HomeViewControllerExtensions.swift in Sources */,
 				0B6FFE39280487CD000EE3C2 /* HomeViewController.swift in Sources */,
 				0B6FFE462804CF2C000EE3C2 /* CollectionTableViewCell.swift in Sources */,
 			);

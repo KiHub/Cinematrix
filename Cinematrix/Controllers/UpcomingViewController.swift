@@ -17,7 +17,7 @@ class UpcomingViewController: UIViewController {
         table.register(MovieTableViewCell.self, forCellReuseIdentifier: MovieTableViewCell.identifier)
         return table
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -50,7 +50,7 @@ class UpcomingViewController: UIViewController {
             }
         }
     }
-
+    
 }
 
 
@@ -61,7 +61,7 @@ extension UpcomingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieTableViewCell.identifier, for: indexPath)
-        as? MovieTableViewCell else { return UITableViewCell() }
+                as? MovieTableViewCell else { return UITableViewCell() }
         
         let title = movies[indexPath.row]
         cell.configure(with: MovieViewModel(titleName: title.title ?? title.original_title ?? "No data", posterUrl: title.poster_path ?? "/abPQVYyNfVuGoFUfGVhlNecu0QG.jpg"))
@@ -83,11 +83,11 @@ extension UpcomingViewController: UITableViewDelegate, UITableViewDataSource {
             switch result {
             case .success(let video):
                 DispatchQueue.main.async {
-                let vc = MoviePreviewViewController()
-                vc.configure(with: MoviePreviewViewModel(title: titleName, youtubeView: video, titleOverview: title.overview ?? "No data"))
+                    let vc = MoviePreviewViewController()
+                    vc.configure(with: MoviePreviewViewModel(title: titleName, youtubeView: video, titleOverview: title.overview ?? "No data"))
                     vc.titleForPreview = title
-                self?.navigationController?.pushViewController(vc, animated: true)
-            }
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }

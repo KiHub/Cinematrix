@@ -32,7 +32,7 @@ class OnboardingContainerViewController: UIViewController {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.gray.cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Getting started", for: .normal)
+        button.setTitle("Get started", for: .normal)
         button.setTitleColor(.gray, for: .normal)
         button.clipsToBounds = true
         button.layer.cornerRadius = 14
@@ -44,9 +44,9 @@ class OnboardingContainerViewController: UIViewController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         
-        let page1 = OnboardingViewController(heroImageName: "11", titleText: "Hey, this is Cinematrix. Brand new and simple app for quick movie search")
-        let page2 = OnboardingViewController(heroImageName: "22", titleText: "Nothing extra, just fresh and good movies")
-        let page3 = OnboardingViewController(heroImageName: "33", titleText: "Let's start!")
+        let page1 = OnboardingViewController(heroImageName: "11", titleText: "Hey, this is Cinematrix. Brand new and simple app for quick movie search 👋")
+        let page2 = OnboardingViewController(heroImageName: "22", titleText: "Nothing extra, just fresh and good movies 🎬")
+        let page3 = OnboardingViewController(heroImageName: "33", titleText: "Let's start 🚀")
         
         pages.append(page1)
         pages.append(page2)
@@ -90,11 +90,6 @@ class OnboardingContainerViewController: UIViewController {
         currentVC = pages.first!
     }
     
-//    private func style() {
-//
-//
-//
-//    }
     
     private func layout() {
         

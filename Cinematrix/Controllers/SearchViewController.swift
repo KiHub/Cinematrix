@@ -25,7 +25,7 @@ class SearchViewController: UIViewController {
         return controller
         
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -62,7 +62,7 @@ class SearchViewController: UIViewController {
         super.viewDidLayoutSubviews()
         searchTable.frame = view.bounds
     }
-
+    
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
@@ -91,11 +91,11 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             switch result {
             case .success(let video):
                 DispatchQueue.main.async {
-                let vc = MoviePreviewViewController()
-                vc.configure(with: MoviePreviewViewModel(title: titleName, youtubeView: video, titleOverview: title.overview ?? "No data"))
+                    let vc = MoviePreviewViewController()
+                    vc.configure(with: MoviePreviewViewModel(title: titleName, youtubeView: video, titleOverview: title.overview ?? "No data"))
                     vc.titleForPreview = title
-                self?.navigationController?.pushViewController(vc, animated: true)
-            }
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -130,18 +130,18 @@ extension SearchViewController: UISearchResultsUpdating, SearchResultsViewContro
     }
     
     func searchResultsViewControllerDidTapItem(_ viewModel: MoviePreviewViewModel) {
-        DispatchQueue.main.async { [weak self] in 
+        DispatchQueue.main.async { [weak self] in
             let vc = MoviePreviewViewController()
             vc.configure(with: viewModel)
             
             self?.navigationController?.pushViewController(vc, animated: true)
         }
-
+        
     }
     func searchResultsViewControllerDidTapItemForSave(_ movie: Movie) {
         DispatchQueue.main.async { [weak self] in
-        let vc = MoviePreviewViewController()
-        vc.titleForPreview = movie
+            let vc = MoviePreviewViewController()
+            vc.titleForPreview = movie
         }
     }
     

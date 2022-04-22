@@ -10,10 +10,9 @@ import WebKit
 
 class MoviePreviewViewController: UIViewController {
     
-  //  var index: IndexPath?
     var titleForPreview: Movie?
     private var movies: [Movie] = [Movie]()
-
+    
     lazy var contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 250)
     
     lazy var scrollView: UIScrollView = {
@@ -97,7 +96,7 @@ class MoviePreviewViewController: UIViewController {
         webView.translatesAutoresizingMaskIntoConstraints = false
         return webView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -127,7 +126,6 @@ class MoviePreviewViewController: UIViewController {
         containerView.addSubview(webWiew)
         containerView.addSubview(titleLabel)
         containerView.addSubview(overViewLabel)
-      //  view.addSubview(downloadButton)
         horizontalStackView.addArrangedSubview(backButton)
         horizontalStackView.addArrangedSubview(downloadButton)
         containerView.addSubview(horizontalStackView)
@@ -161,14 +159,7 @@ class MoviePreviewViewController: UIViewController {
         ]
         NSLayoutConstraint.activate(overViewLabelConstraints)
         
-//        let downloadButtonConstraints = [
-//            downloadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            downloadButton.topAnchor.constraint(equalTo: overViewLabel.bottomAnchor, constant: 20),
-//            downloadButton.widthAnchor.constraint(equalToConstant: 150)
-//        ]
-//        NSLayoutConstraint.activate(downloadButtonConstraints)
         let stackViewConstraints = [
-          //  downloadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             backButton.widthAnchor.constraint(equalToConstant: 140),
             downloadButton.widthAnchor.constraint(equalToConstant: 140),
             horizontalStackView.topAnchor.constraint(equalTo: overViewLabel.bottomAnchor, constant: 20),
@@ -187,27 +178,19 @@ class MoviePreviewViewController: UIViewController {
         webWiew.load(URLRequest(url: url))
     }
     
-//    @objc func backAction(sender: UIButton!) {
-//      print("Button tapped")
-//        navigationController?.popViewController(animated: true)
-//       // dismiss(animated: true, completion: nil)
-//    }
-    
-
 }
 
 extension MoviePreviewViewController {
     @objc func backAction(sender: UIButton!) {
-      print("Back button tapped")
+        print("Back button tapped")
         navigationController?.popViewController(animated: true)
-       // dismiss(animated: true, completion: nil)
+        // dismiss(animated: true, completion: nil)
     }
     @objc func addAction(sender: UIButton!) {
-      print("Add button tapped")
-      //  guard let indexPath = index else {return}
-        print(titleForPreview?.title)
+        print("Add button tapped")
+        //   print(titleForPreview?.title)
         guard let currentMovie = titleForPreview else {return}
-        print(currentMovie.title)
+        //   print(currentMovie.title)
         downloadTitleAt(currentMovie: currentMovie)
     }
 }
@@ -225,7 +208,7 @@ extension MoviePreviewViewController {
                 print(error.localizedDescription)
             }
         }
-     //   print("Downloading \(movies[indexPath.row].title)")
+        //   print("Downloading \(movies[indexPath.row].title)")
     }
     
 }

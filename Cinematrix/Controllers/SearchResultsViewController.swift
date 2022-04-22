@@ -9,7 +9,7 @@ import UIKit
 
 protocol SearchResultsViewControllerDelegate: AnyObject {
     func searchResultsViewControllerDidTapItem(_ viewModel: MoviePreviewViewModel)
-
+    
 }
 
 class SearchResultsViewController: UIViewController {
@@ -18,7 +18,7 @@ class SearchResultsViewController: UIViewController {
     public weak var delegate: SearchResultsViewControllerDelegate?
     
     public let searchResultsCollectionView: UICollectionView = {
-       
+        
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: UIScreen.main.bounds.width / 3 - 15, height: 200)
         layout.minimumInteritemSpacing = 0
@@ -26,7 +26,7 @@ class SearchResultsViewController: UIViewController {
         collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: MovieCollectionViewCell.identifier)
         return collectionView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -34,7 +34,7 @@ class SearchResultsViewController: UIViewController {
         
         searchResultsCollectionView.delegate = self
         searchResultsCollectionView.dataSource = self
-
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -42,7 +42,7 @@ class SearchResultsViewController: UIViewController {
         searchResultsCollectionView.frame = view.bounds
         
     }
-
+    
 }
 
 extension SearchResultsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -53,8 +53,7 @@ extension SearchResultsViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.identifier, for: indexPath)
                 as? MovieCollectionViewCell else { return UICollectionViewCell() }
-//        guard let cell = collectionView.cellForItem(at: indexPath)  as? MovieCollectionViewCell else { return UICollectionViewCell() }
-       // cell.backgroundColor = .blue
+
         let movie = movies[indexPath.row]
         cell.configure(with: movie.poster_path ?? "")
         return cell
@@ -66,19 +65,16 @@ extension SearchResultsViewController: UICollectionViewDelegate, UICollectionVie
         APICaller.shared.getMovie(with: titleName) { [weak self] result in
             switch result {
             case .success(let video):
-//                DispatchQueue.main.async {
-//                    let vc = MoviePreviewViewController()
-//                    vc.titleForPreview = title
-//                }
+
                 self?.delegate?.searchResultsViewControllerDidTapItem(MoviePreviewViewModel(title: title.title ?? "", youtubeView: video , titleOverview: title.overview ?? ""))
-           
+                
                 
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
         
-      
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
@@ -87,9 +83,7 @@ extension SearchResultsViewController: UICollectionViewDelegate, UICollectionVie
                 let downloadAction = UIAction(title: "Add to list", image: nil, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
                     self?.downloadTitleAt(indexPath: indexPath)
                 }
-//                let downloadAction = UIAction(title: "Download", subtitle: nil, image: nil, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
-//                    print("Download")
-//                }
+
                 return UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [downloadAction])
             }
         return config
@@ -100,24 +94,18 @@ extension SearchResultsViewController: UICollectionViewDelegate, UICollectionVie
 
 extension SearchResultsViewController {
     private func downloadTitleAt(indexPath: IndexPath) {
-    //    let title = self.movies[indexPath.row]
+        //    let title = self.movies[indexPath.row]
         DataPersistentManager.shared.downloadMovieToDataBase(model: movies[indexPath.row]) { result in
             switch result {
             case .success():
-               
-//                DispatchQueue.main.async {
-//                let vc = MoviePreviewViewController()
-//                vc.titleForPreview = title
-//                }
                 
                 print("Downloaded to DB")
                 NotificationCenter.default.post(name: NSNotification.Name("loaded"), object: nil)
-                
                 
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
-        print("Downloading \(movies[indexPath.row].title)")
+        //    print("Downloading \(movies[indexPath.row].title)")
     }
 }

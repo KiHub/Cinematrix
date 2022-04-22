@@ -7,11 +7,8 @@
 
 import UIKit
 
-
-
 enum Sections: Int {
     case TrendyMovies = 0
-   // case TrendyTv = 1
     case Popular = 1
     case Upcoming = 2
     case TopRated = 3
@@ -21,11 +18,9 @@ class HomeViewController: UIViewController {
     
     private var randomTrendyMovie: Movie?
     private var headerView: HeroHeaderUIView?
-
-   
-    var heroHeader = HeroHeaderUIView()
-    let refreshControl = UIRefreshControl()
-    let sectionTitles: [String] = ["Trendy", "Popular", "Upcoming", "Top rated"]
+ //  private var heroHeader = HeroHeaderUIView()
+    private let refreshControl = UIRefreshControl()
+    private let sectionTitles: [String] = ["Trendy", "Popular", "Upcoming", "Top rated"]
     
     private let homeTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -33,35 +28,33 @@ class HomeViewController: UIViewController {
         return table
     }()
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        if UITraitCollection.current.userInterfaceStyle == .dark {
-//                print("Dark mode")
-//            heroHeader.basicColor = UIColor.black
-//            heroHeader.addGradient()
-//            }
-//            else {
-//                print("Light mode")
-//                heroHeader.basicColor = UIColor.white
-//                heroHeader.addGradient()
-//            }
-//        
-//
-//    }
-
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        super.viewWillAppear(animated)
+    //        if UITraitCollection.current.userInterfaceStyle == .dark {
+    //                print("Dark mode")
+    //            heroHeader.basicColor = UIColor.black
+    //            heroHeader.addGradient()
+    //            }
+    //            else {
+    //                print("Light mode")
+    //                heroHeader.basicColor = UIColor.white
+    //                heroHeader.addGradient()
+    //            }
+    //
+    //
+    //    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         view.addSubview(homeTable)
-        
         homeTable.delegate = self
         homeTable.dataSource = self
+        headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         homeTable.separatorStyle = .none
         homeTable.backgroundColor = .systemBackground
-        configureNavBar()
-      
-        headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         homeTable.tableHeaderView = headerView
+        configureNavBar()
         configureHeaderView()
         setupRefreshControl()
     }
@@ -71,31 +64,22 @@ class HomeViewController: UIViewController {
         homeTable.frame = view.bounds
     }
     
-//    private func getTrendyMovies() {
-//        APICaller.shared.getTrendyMovies { results in
-//            switch results {
-//            case .success(let movies):
-//                print(movies)
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-//    }
-    
-    private func configureHeaderView() {
 
+}
+
+extension HomeViewController {
+    private func configureHeaderView() {
+        
         APICaller.shared.getTrendyMovies { [weak self] result in
             switch result {
             case .success(let movies):
                 let selectedTitle = movies.randomElement()
-
+                
                 self?.randomTrendyMovie = selectedTitle
                 DispatchQueue.main.async {
                     self?.headerView?.configureHeaderImage(with: MovieViewModel(titleName: selectedTitle?.title ?? "", posterUrl: selectedTitle?.poster_path ?? ""))
-                    
-                    
                     self?.homeTable.refreshControl?.endRefreshing()
-                   
+                    
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -104,25 +88,23 @@ class HomeViewController: UIViewController {
     }
     
     private func setupRefreshControl() {
-
-          refreshControl.addTarget(self, action: #selector(refreshContent), for: .valueChanged)
-          homeTable.refreshControl = refreshControl
+        
+        refreshControl.addTarget(self, action: #selector(refreshContent), for: .valueChanged)
+        homeTable.refreshControl = refreshControl
     }
     
     private func configureNavBar() {
         var image = UIImage(named: "miniLogo")
         image = image?.withRenderingMode(.alwaysOriginal)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(aboutAction))
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationItem.leftBarButtonItems =
         [
-       // UIBarButtonItem(image: UIImage(systemName: "info"), style: .done, target: self, action:  #selector(aboutAction)),
-        UIBarButtonItem(image: UIImage(systemName: "star"), style: .done, target: self, action:  #selector(selectedAction))
+            // UIBarButtonItem(image: UIImage(systemName: "info"), style: .done, target: self, action:  #selector(aboutAction)),
+            UIBarButtonItem(image: UIImage(systemName: "film"), style: .done, target: self, action:  #selector(selectedAction))
         ]
         navigationController?.navigationBar.tintColor = .systemGray
-       
-       
     }
     
 }
@@ -153,16 +135,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             
-//        case Sections.TrendyTv.rawValue:
-//            APICaller.shared.getTrendyTv { result in
-//                switch result {
-//                case .success(let movies):
-//                    cell.configure(with: movies)
-//                case .failure(let error):
-//                    print(error.localizedDescription)
-//                }
-//            }
-            
         case Sections.Popular.rawValue:
             APICaller.shared.getPopular { result in
                 switch result {
@@ -177,7 +149,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             APICaller.shared.getUpcomingMovies { result in
                 switch result {
                 case .success(let movies):
-                 //   print(movies[0].poster_path)
+                    //   print(movies[0].poster_path)
                     cell.configure(with: movies)
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -197,7 +169,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-     //   cell.configure(with: "")
         
         return cell
     }
@@ -228,8 +199,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let defaultOffset = view.safeAreaInsets.top
         let ofset = scrollView.contentOffset.y + defaultOffset
-        
-        
         navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -ofset))
     }
     
@@ -241,15 +210,7 @@ extension HomeViewController: CollectionTableViewCellDelegate {
         DispatchQueue.main.async { [weak self] in
             let vc = MoviePreviewViewController()
             vc.configure(with: viewModel)
-//                        guard let title = self?.titleForPreviewHome else {return}
-//                        vc.titleForPreview = title
             self?.navigationController?.pushViewController(vc, animated: true)
-          //  vc.
-//            vc.configure(with: MoviePreviewViewModel(title: title ?? "No data", youtubeView: viewModel.youtubeView, titleOverview: viewModel.titleOverview ))
-    //        vc.configure(with: MoviePreviewViewModel(title: titleName, youtubeView: video, titleOverview: title.overview ?? "No data"))
-           
-//            guard let title = self?.titleForPreviewHome else {return}
-//            vc.titleForPreview = title
         }
     }
 }
@@ -258,7 +219,6 @@ extension HomeViewController {
     private func shakeLabel() {
         let animation = CAKeyframeAnimation()
         animation.keyPath = "position.x"
- 
         animation.values = [0, 15, -10, 15, 0]
         animation.keyTimes = [0, 0.16, 0.5, 0.83, 1]
         animation.duration = 0.4
@@ -272,30 +232,26 @@ extension HomeViewController {
         configureHeaderView()
         shakeLabel()
         print("refresh")
-        
-        }
+    }
     @objc func selectedAction() {
         let vc = DownloadsViewController()
         self.navigationController?.pushViewController(vc, animated: true)
         print("person")
-        }
-//    @objc func mailAction() {
-//        print("mail")
-//        }
-//    @objc func aboutAction() {
-//        showAlert()
-//        print("about")
-//        }
+    }
+    @objc func aboutAction() {
+        showAlert()
+    }
+}
+extension HomeViewController {
+    func showAlert() {
+        let alertController = UIAlertController(title: "Cinematrix",
+                                                message: "Tthis is cinematrix. Brand new and simple app for quick movie search",
+                                                preferredStyle: .actionSheet)
+        alertController.view.tintColor = .gray
+        let defaultAction = UIAlertAction(title: "Got it ✌️", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
 }
 
-//extension HomeViewController {
-//    func showAlert() {
-//       let alert = UIAlertController(title: "About cinematrix",
-//                                     message: "Hey, this is fresh and easy to use app for all cine lovers",
-//                                     preferredStyle: .actionSheet)
-//       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//        present(alert, animated: true) {
-//            alert.view.tintColor = .gray
-//        }
-//   }
-//}

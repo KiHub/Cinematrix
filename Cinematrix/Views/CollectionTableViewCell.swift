@@ -12,8 +12,8 @@ protocol CollectionTableViewCellDelegate: AnyObject {
 }
 
 class CollectionTableViewCell: UITableViewCell {
-
-   static let identifier = "CollectionTableViewCell"
+    
+    static let identifier = "CollectionTableViewCell"
     
     weak var delegate: CollectionTableViewCellDelegate?
     
@@ -35,7 +35,7 @@ class CollectionTableViewCell: UITableViewCell {
         collectionView.backgroundColor = .systemBackground
         collectionView.delegate = self
         collectionView.dataSource = self
-   
+        
     }
     
     required init?(coder: NSCoder) {
@@ -55,15 +55,10 @@ class CollectionTableViewCell: UITableViewCell {
         }
     }
     private func downloadTitleAt(indexPath: IndexPath) {
-    //    let title = self.movies[indexPath.row]
+        //    let title = self.movies[indexPath.row]
         DataPersistentManager.shared.downloadMovieToDataBase(model: movies[indexPath.row]) { result in
             switch result {
             case .success():
-               
-//                DispatchQueue.main.async {
-//                let vc = MoviePreviewViewController()
-//                vc.titleForPreview = title
-//                }
                 
                 print("Downloaded to DB")
                 NotificationCenter.default.post(name: NSNotification.Name("loaded"), object: nil)
@@ -73,7 +68,7 @@ class CollectionTableViewCell: UITableViewCell {
                 print(error.localizedDescription)
             }
         }
-        print("Downloading \(movies[indexPath.row].title)")
+        //      print("Downloading \(movies[indexPath.row].title)")
     }
 }
 
@@ -97,11 +92,10 @@ extension CollectionTableViewCell: UICollectionViewDelegate, UICollectionViewDat
         collectionView.deselectItem(at: indexPath, animated: true)
         let title = movies[indexPath.row]
         guard let titleName = title.title else { return }
-        print(movies[indexPath.row].title)
-       //to do check passing data
+        //   print(movies[indexPath.row].title)
         let vc = MoviePreviewViewController()
         vc.titleForPreview = title
- 
+        
         
         APICaller.shared.getMovie(with: titleName + " trailer") { [weak self] result in
             switch result {
@@ -121,14 +115,9 @@ extension CollectionTableViewCell: UICollectionViewDelegate, UICollectionViewDat
                 let downloadAction = UIAction(title: "Add to list", image: nil, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
                     self?.downloadTitleAt(indexPath: indexPath)
                 }
-//                let downloadAction = UIAction(title: "Download", subtitle: nil, image: nil, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
-//                    print("Download")
-//                }
                 return UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [downloadAction])
             }
         return config
     }
-    
-    
     
 }

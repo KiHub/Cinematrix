@@ -22,7 +22,7 @@
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="labelColor"/>
                         <constraints>
                             <constraint firstItem="Khk-ZD-AAN" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="UmX-AM-Xi7"/>
                             <constraint firstItem="Khk-ZD-AAN" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="tqX-zV-ZPP"/>
@@ -36,8 +36,8 @@
     </scenes>
     <resources>
         <image name="cine" width="166.5" height="165"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>
