@@ -216,6 +216,7 @@ extension HomeViewController: CollectionTableViewCellDelegate {
 }
 
 extension HomeViewController {
+    //MARK: - Animation
     private func shakeLabel() {
         let animation = CAKeyframeAnimation()
         animation.keyPath = "position.x"
