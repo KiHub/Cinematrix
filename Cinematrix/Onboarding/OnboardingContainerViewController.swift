@@ -16,7 +16,29 @@ class OnboardingContainerViewController: UIViewController {
     let pageViewController: UIPageViewController
     var pages = [UIViewController]()
     var currentVC: UIViewController
-    let closeButton = UIButton(type: .system)
+    private let closeButton: UIButton = {
+        
+        let closeButton = UIButton(type: .system)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.tintColor = .systemGray
+        closeButton.setTitle("Close", for: [])
+        closeButton.addTarget(self, action: #selector(closeTapped), for: .primaryActionTriggered)
+        return closeButton
+    }()
+    private let startButton: UIButton = {
+        
+        let button = UIButton(type: .system)
+        button.backgroundColor = .clear
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.gray.cgColor
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Getting started", for: .normal)
+        button.setTitleColor(.gray, for: .normal)
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 14
+        button.addTarget(self, action: #selector(atartTapped), for: .touchUpInside)
+        return button
+    }()
     weak var delegate: OnboardingContainerViewControllerDelegate?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -43,7 +65,7 @@ class OnboardingContainerViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        style()
+     //   style()
         layout()
         
     }
@@ -53,6 +75,8 @@ class OnboardingContainerViewController: UIViewController {
         //MARK: - Load and sutup pageVC
         addChild(pageViewController)
         view.addSubview(pageViewController.view)
+        view.addSubview(closeButton)
+        view.addSubview(startButton)
         pageViewController.didMove(toParent: self)
         
         //MARK: - Delegate
@@ -60,33 +84,42 @@ class OnboardingContainerViewController: UIViewController {
         //MARK: - Turn off auto constaraints
         pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: pageViewController.view.topAnchor),
-            view.leadingAnchor.constraint(equalTo: pageViewController.view.leadingAnchor),
-            view.trailingAnchor.constraint(equalTo: pageViewController.view.trailingAnchor),
-            view.bottomAnchor.constraint(equalTo: pageViewController.view.bottomAnchor),
-        ])
+       
         
         pageViewController.setViewControllers([pages.first!], direction: .forward, animated: false, completion: nil)
         currentVC = pages.first!
     }
     
-    private func style() {
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
-        closeButton.tintColor = .systemGray
-        closeButton.setTitle("Close", for: [])
-        closeButton.addTarget(self, action: #selector(closeTapped), for: .primaryActionTriggered)
-        
-        view.addSubview(closeButton)
-    }
+//    private func style() {
+//
+//
+//
+//    }
     
     private func layout() {
         
-        NSLayoutConstraint.activate([
+        let pageViewControllerConstraints = [
+            view.topAnchor.constraint(equalTo: pageViewController.view.topAnchor),
+            view.leadingAnchor.constraint(equalTo: pageViewController.view.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: pageViewController.view.trailingAnchor),
+            view.bottomAnchor.constraint(equalTo: pageViewController.view.bottomAnchor),
+        ]
+        NSLayoutConstraint.activate(pageViewControllerConstraints)
+        
+        let closeButtonConstraints = [
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: closeButton.trailingAnchor, multiplier: 4),
         //    closeButton.trailingAnchor.constraint(equalToSystemSpacingAfter: view.trailingAnchor, multiplier: 2),
             closeButton.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 4)
-        ])
+        ]
+        NSLayoutConstraint.activate(closeButtonConstraints)
+        
+        let startButtonConstraints = [
+            startButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            startButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150)
+           
+        ]
+        NSLayoutConstraint.activate(startButtonConstraints)
     
     }
     
@@ -130,5 +163,9 @@ extension OnboardingContainerViewController {
     @objc func closeTapped(_ sender: UIButton) {
         delegate?.didFinishOnboarding()
         print("Close tapped")
+    }
+    @objc func atartTapped(_ sender: UIButton) {
+        delegate?.didFinishOnboarding()
+        print("Start tapped")
     }
 }

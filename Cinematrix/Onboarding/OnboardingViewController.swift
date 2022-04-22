@@ -9,10 +9,16 @@ import UIKit
 
 class OnboardingViewController: UIViewController {
     
-    let stackView = UIStackView()
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        return stackView
+    }()
+    
     let imageView = UIImageView()
     let label = UILabel()
-    
     let heroImageName: String
     let titleText: String
     
@@ -37,10 +43,6 @@ class OnboardingViewController: UIViewController {
 extension OnboardingViewController {
     func style() {
         view.backgroundColor = .systemBackground
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.spacing = 20
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
