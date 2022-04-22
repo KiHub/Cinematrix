@@ -246,7 +246,7 @@ extension HomeViewController {
 extension HomeViewController {
     func showAlert() {
         let alertController = UIAlertController(title: "Cinematrix",
-                                                message: "Tthis is cinematrix. Brand new and simple app for quick movie search",
+                                                message: "This is cinematrix. Brand new and simple app for quick movie search",
                                                 preferredStyle: .actionSheet)
         alertController.view.tintColor = .gray
         let defaultAction = UIAlertAction(title: "Got it ✌️", style: .default, handler: nil)

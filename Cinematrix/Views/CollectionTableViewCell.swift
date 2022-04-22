@@ -114,6 +114,7 @@ extension CollectionTableViewCell: UICollectionViewDelegate, UICollectionViewDat
             identifier: nil, previewProvider: nil) { [weak self] _ in
                 let downloadAction = UIAction(title: "Add to list", image: nil, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
                     self?.downloadTitleAt(indexPath: indexPath)
+              
                 }
                 return UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [downloadAction])
             }
